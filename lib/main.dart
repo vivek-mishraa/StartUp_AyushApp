@@ -11,7 +11,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'flutter demo',
-      theme: ThemeData(primarySwatch: Colors.indigo),
+      theme: ThemeData(
+          primarySwatch: Colors.indigo,
+          appBarTheme: AppBarTheme(elevation: 1, color: Colors.lightGreen)),
       home: LoginDemo(),
     );
   }

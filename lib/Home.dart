@@ -1,96 +1,97 @@
 import 'package:flutter/material.dart';
-
-/// Flutter code sample for [NavigationBar].
+import 'header.dart';
 
 void main() => runApp(const Homescreen());
 
-class Homescreen extends StatelessWidget {
+class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: NavigationExample(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
+  State<Homescreen> createState() => _HomescreenState();
 }
 
-class NavigationExample extends StatefulWidget {
-  const NavigationExample({super.key});
-
-  @override
-  State<NavigationExample> createState() => _NavigationExampleState();
-}
-
-class _NavigationExampleState extends State<NavigationExample> {
-  int currentPageIndex = 0;
-
+class _HomescreenState extends State<Homescreen> {
+  int currentPage = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (int index) {
-          setState(() {
-            currentPageIndex = index;
-          });
-        },
-        indicatorColor: Colors.amber[800],
-        selectedIndex: currentPageIndex,
-        destinations: const <Widget>[
-          NavigationDestination(
-            selectedIcon: Icon(Icons.home),
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.search),
-            label: 'Explore',
-          ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.chat),
-            icon: Icon(Icons.chat_bubble_outline),
-            label: 'Chat',
-          ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.people_alt_outlined),
-            icon: Icon(Icons.people_alt_rounded),
-            label: 'Connect',
-          ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.person),
-            icon: Icon(Icons.person_2_outlined),
-            label: 'Profile',
-          ),
-        ],
+      body: header(),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          children: [
+            Spacer(),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  currentPage = 0;
+                });
+              },
+              selectedIcon: Icon(Icons.home),
+              icon: Icon(
+                Icons.home_outlined,
+                color: currentPage == 0 ? Colors.lightGreen : Colors.black,
+              ),
+            ),
+            Spacer(),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  currentPage = 1;
+                });
+              },
+              icon: Icon(
+                Icons.search,
+                color: currentPage == 1 ? Colors.lightGreen : Colors.black,
+              ),
+            ),
+            Spacer(),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  currentPage = 2;
+                });
+              },
+              selectedIcon: Icon(
+                Icons.chat,
+                color: Colors.lightBlue,
+              ),
+              icon: Icon(
+                Icons.chat_bubble_outline,
+                color: currentPage == 2 ? Colors.lightGreen : Colors.black,
+              ),
+            ),
+            Spacer(),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  currentPage = 3;
+                });
+              },
+              selectedIcon: Icon(
+                Icons.people_alt_outlined,
+                color: Colors.lightBlue,
+              ),
+              icon: Icon(
+                Icons.people_alt_rounded,
+                color: currentPage == 3 ? Colors.lightGreen : Colors.black,
+              ),
+            ),
+            Spacer(),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  currentPage = 4;
+                });
+              },
+              selectedIcon: Icon(Icons.person),
+              icon: Icon(
+                Icons.person_2_outlined,
+                color: currentPage == 4 ? Colors.lightGreen : Colors.black,
+              ),
+            ),
+          ],
+        ),
       ),
-      body: <Widget>[
-        Container(
-          color: Colors.red,
-          alignment: Alignment.center,
-          child: const Text('Page 1'),
-        ),
-        Container(
-          color: Colors.green,
-          alignment: Alignment.center,
-          child: const Text('Page 2'),
-        ),
-        Container(
-          color: Colors.blue,
-          alignment: Alignment.center,
-          child: const Text('Page 3'),
-        ),
-        Container(
-          color: Color.fromARGB(255, 237, 223, 27),
-          alignment: Alignment.center,
-          child: const Text('Page 4'),
-        ),
-        Container(
-          color: Color.fromARGB(255, 214, 8, 200),
-          alignment: Alignment.center,
-          child: const Text('Page 5'),
-        ),
-      ][currentPageIndex],
     );
   }
 }
